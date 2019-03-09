@@ -18,13 +18,13 @@ Parallelized task runner. Inspired from [Gulp.js](https://gulpjs.com)
 With npm
 
 ```bash
-npm install --save-dev fang@0.*
+npm install --save-dev @khalyomede/fang@0.*
 ```
 
 With yarn
 
 ```bash
-yarn add --dev fang@0.*
+yarn add --dev @khalyomede/fang@0.*
 ```
 
 ## Usage
