@@ -267,15 +267,10 @@ class Fang {
 		const fileCount = this.files.length;
 
 		for (let i = 0; i < fileCount; i++) {
-			console.log("before", this.files[i].path);
-			console.log("base dir", this.baseDirectory);
-
 			this.files[i].path = slash(resolve(this.files[i].path)).replace(
 				this.baseDirectory,
 				""
 			);
-
-			console.log("after", this.files[i].path);
 		}
 
 		return new Promise((resolve, reject) => {
