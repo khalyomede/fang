@@ -43,7 +43,8 @@
 		"fang": "lib/cli.js"
 	},
 	"scripts": {
-		"start": "gulp watch"
+		"start": "gulp watch",
+		"build": "gulp build"
 	},
 	"files": [
 		"lib/main.js",
