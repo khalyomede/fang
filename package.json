@@ -1,0 +1,52 @@
+{
+	"name": "fang",
+	"description": "Parallelized task runner.",
+	"keywords": [
+		"gulp",
+		"parallelized",
+		"task runner",
+		"fang",
+		"build tool"
+	],
+	"version": "0.1.0",
+	"main": "lib/main.js",
+	"license": "MIT",
+	"devDependencies": {
+		"@babel/core": "^7.3.4",
+		"@types/node": "11.*",
+		"autoprefixer": "9.*",
+		"clean-css": "4.*",
+		"gulp": "4.*",
+		"gulp-imagemin": "5.*",
+		"gulp-typescript": "5.*",
+		"gulp-webp": "4.*",
+		"html-minifier": "3.*",
+		"imagemin": "6.*",
+		"imagemin-cli": "4.*",
+		"modify-filename": "1.*",
+		"node-sass": "4.*",
+		"postcss": "7.*",
+		"pug": "2.*",
+		"typescript": "3.*",
+		"uglify-es": "3.*"
+	},
+	"dependencies": {
+		"cli": "1.*",
+		"cli-color": "1.*",
+		"commondir": "1.*",
+		"fancy-log": "1.*",
+		"fs-extra": "7.*",
+		"glob": "7.*",
+		"performance-now": "2.*"
+	},
+	"bin": {
+		"fang": "lib/cli.js"
+	},
+	"scripts": {
+		"start": "gulp watch"
+	},
+	"files": [
+		"lib/main.js",
+		"lib/cli.js"
+	]
+}
