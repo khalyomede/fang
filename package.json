@@ -1,5 +1,5 @@
 {
-	"name": "fang",
+	"name": "@khalyomede/fang",
 	"description": "Parallelized task runner.",
 	"keywords": [
 		"gulp",
