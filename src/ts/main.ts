@@ -9,8 +9,6 @@ const now = require("performance-now");
 import { existsSync, readFileSync, writeFile } from "fs";
 import { sep, dirname } from "path";
 import { exit } from "cli";
-import { TSImportEqualsDeclaration } from "babel-types";
-import { resolve } from "upath";
 
 interface Options {
 	maxCore?: number;
