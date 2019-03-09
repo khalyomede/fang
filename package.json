@@ -37,7 +37,8 @@
 		"fancy-log": "1.*",
 		"fs-extra": "7.*",
 		"glob": "7.*",
-		"performance-now": "2.*"
+		"performance-now": "2.*",
+		"slash": "2.*"
 	},
 	"bin": {
 		"fang": "lib/cli.js"

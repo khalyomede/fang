@@ -5,6 +5,7 @@ import * as cliColor from "cli-color";
 import * as glob from "glob";
 import * as fsExtra from "fs-extra";
 import * as commondir from "commondir";
+import * as slash from "slash";
 const now = require("performance-now");
 import { existsSync, readFileSync, writeFile } from "fs";
 import { sep, dirname, resolve } from "path";
@@ -266,10 +267,15 @@ class Fang {
 		const fileCount = this.files.length;
 
 		for (let i = 0; i < fileCount; i++) {
-			this.files[i].path = resolve(this.files[i].path).replace(
+			console.log("before", this.files[i].path);
+			console.log("base dir", this.baseDirectory);
+
+			this.files[i].path = slash(resolve(this.files[i].path)).replace(
 				this.baseDirectory,
 				""
 			);
+
+			console.log("after", this.files[i].path);
 		}
 
 		return new Promise((resolve, reject) => {
