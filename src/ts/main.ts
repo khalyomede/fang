@@ -7,7 +7,7 @@ import * as fsExtra from "fs-extra";
 import * as commondir from "commondir";
 const now = require("performance-now");
 import { existsSync, readFileSync, writeFile } from "fs";
-import { sep, dirname } from "path";
+import { sep, dirname, resolve } from "path";
 import { exit } from "cli";
 
 interface Options {
