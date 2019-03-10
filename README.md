@@ -2,6 +2,8 @@
 
 Parallelized task runner. Inspired from [Gulp.js](https://gulpjs.com)
 
+![npm](https://img.shields.io/npm/v/@khalyomede/fang.svg) ![NPM](https://img.shields.io/npm/l/@khalyomede/fang.svg) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@khalyomede/fang.svg)
+
 ![Fang logo of a tiger in black and white](https://cdn4.iconfinder.com/data/icons/vectortown-endangered-species/32/Tiger-256.png)
 
 ## Summary
@@ -160,7 +162,7 @@ fang build
 
 ## Official plugins
 
-None.
+- [pug](https://www.npmjs.com/package/@khalyomede/fang-pug)
 
 ## Community plugins
 
