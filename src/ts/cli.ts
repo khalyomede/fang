@@ -5,8 +5,9 @@ import * as cli from "cli";
 import * as os from "os";
 import { sep } from "path";
 import * as cliColor from "cli-color";
+const packageJson = require("../package.json");
 
-cli.setApp("fang", "0.1.0");
+cli.setApp("fang", packageJson.version);
 cli.setUsage("fang [options] <task>");
 cli.enable("help");
 cli.enable("version");
