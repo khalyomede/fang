@@ -42,6 +42,14 @@ class Fang {
 		let opts = options;
 		let maxCore = 1;
 
+		const typeOfOpts = typeof opts;
+
+		if (typeOfOpts !== "object") {
+			throw new TypeError(
+				`the options should be an object (got: ${typeOfOpts})`
+			);
+		}
+
 		if ("maxCore" in opts) {
 			const typeOfMaxCore = typeof opts.maxCore;
 			if (typeOfMaxCore !== "number") {
@@ -100,11 +108,7 @@ class Fang {
 		let tasks = require(opts.tasksPath);
 
 		if (!(opts.taskName in tasks)) {
-			fancyLog.error(
-				`${cliColor.green("fang")}: task "${opts.taskName}" not found`
-			);
-
-			exit(1);
+			throw new Error(`task "${opts.taskName}" not found`);
 		}
 
 		tasks = tasks[opts.taskName];
