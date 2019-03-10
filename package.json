@@ -15,6 +15,7 @@
 		"@babel/core": "^7.3.4",
 		"@types/node": "11.*",
 		"autoprefixer": "9.*",
+		"chai": "4.*",
 		"clean-css": "4.*",
 		"gulp": "4.*",
 		"gulp-imagemin": "5.*",
@@ -23,6 +24,7 @@
 		"html-minifier": "3.*",
 		"imagemin": "6.*",
 		"imagemin-cli": "4.*",
+		"mocha": "5.*",
 		"modify-filename": "1.*",
 		"node-sass": "4.*",
 		"postcss": "7.*",
@@ -45,7 +47,9 @@
 	},
 	"scripts": {
 		"start": "gulp watch",
-		"build": "gulp build"
+		"build": "gulp build",
+		"test": "mocha test",
+		"mocha": "mocha"
 	},
 	"files": [
 		"lib/main.js",
