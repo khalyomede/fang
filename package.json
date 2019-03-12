@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.3.4",
+		"@stryker-mutator/core": "1.*",
 		"@types/node": "11.*",
 		"autoprefixer": "9.*",
 		"chai": "4.*",
@@ -28,9 +29,10 @@
 		"html-minifier": "3.*",
 		"imagemin": "6.*",
 		"imagemin-cli": "4.*",
-		"mocha": "5.*",
+		"mocha": "6.*",
 		"modify-filename": "1.*",
 		"node-sass": "4.*",
+		"nyc": "13.*",
 		"postcss": "7.*",
 		"pug": "2.*",
 		"typescript": "3.*",
@@ -52,8 +54,9 @@
 	"scripts": {
 		"start": "gulp watch",
 		"build": "gulp build",
-		"test": "mocha test",
-		"mocha": "mocha"
+		"test": "nyc mocha test",
+		"mocha": "mocha",
+		"mutate": "stryker run --mutate lib/main.js"
 	},
 	"files": [
 		"lib/main.js",
