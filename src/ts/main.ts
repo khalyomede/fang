@@ -28,6 +28,7 @@ class Fang {
 	protected options: Object;
 	protected baseDirectory: string;
 
+	protected static _subTask = {};
 	protected static options: {};
 
 	public constructor() {
@@ -315,19 +316,34 @@ class Fang {
 		const modules = require(tasksPath);
 
 		for (const moduleName in modules) {
-			const subTasks = modules[moduleName];
+			this._subTask = modules[moduleName];
 			let subTasksNames = [];
 
 			for (const subTask of subTasks) {
-				subTasksNames.push(subTask.name);
+				if (this._subTaskWellFormed()) {
+					subTasksNames.push(this._getSubTaskName());
+				}
 			}
 
-			tasks.push(
-				`${cliColor.green(moduleName)}: ${subTasksNames.join(", ")}`
-			);
+			tasks.push(this._getColoredTask(moduleName, subTasksNames));
 		}
 
 		return tasks;
+	}
+
+	protected static _getColoredTask(
+		moduleName: string,
+		tasksNames: Array<string>
+	): string {
+		return `${cliColor.green(moduleName)}: ${tasksNames.join(", ")}`;
+	}
+
+	protected static _subTaskWellFormed(): boolean {
+		return "name" in this._subTask;
+	}
+
+	protected static _getSubTaskName(): string {
+		return this._subTaskWellFormed() ? this._subTask.name : "?";
 	}
 }
 
