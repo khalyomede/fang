@@ -36,14 +36,6 @@ describe("fang", () => {
 				fang.run({});
 			}).to.throw("the task name is missing");
 		});
-
-		it("should throw an error message if the task could not be found", () => {
-			expect(function() {
-				fang.run({
-					taskName: "not found"
-				});
-			}).to.throw(`task "not found" not found`);
-		});
 	});
 
 	describe("from", () => {
@@ -57,8 +49,7 @@ describe("fang", () => {
 		it("should return an empty option list", () => {
 			const expected = {
 				maxCore: cpus().length,
-				tasksPath: resolve(__dirname + "/../fang.js"),
-				taskName: "not found"
+				tasksPath: resolve(__dirname + "/../fang.js")
 			};
 			const actual = fang.from("example/src/js/**/*.js").options;
 
