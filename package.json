@@ -22,6 +22,7 @@
 		"autoprefixer": "9.*",
 		"chai": "4.*",
 		"clean-css": "4.*",
+		"coveralls": "3.*",
 		"gulp": "4.*",
 		"gulp-imagemin": "5.*",
 		"gulp-typescript": "5.*",
@@ -56,10 +57,21 @@
 		"build": "gulp build",
 		"test": "nyc mocha test",
 		"mocha": "mocha",
-		"mutate": "stryker run --mutate lib/main.js"
+		"mutate": "stryker run --mutate lib/main.js",
+		"coverage": "nyc mocha test && nyc report --reporter=text-lcov | coveralls"
 	},
 	"files": [
 		"lib/main.js",
 		"lib/cli.js"
-	]
+	],
+	"nyc": {
+		"all": true,
+		"include": [
+			"lib/**/*.js"
+		],
+		"exclude": [
+			"lib/cli.js",
+			"./fang.js"
+		]
+	}
 }
