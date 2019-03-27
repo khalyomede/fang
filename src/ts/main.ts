@@ -23,12 +23,16 @@ interface File {
 	content: Buffer;
 }
 
+interface SubTask {
+	name: string;
+}
+
 class Fang {
 	protected files: Array<File>;
 	protected options: Object;
 	protected baseDirectory: string;
 
-	protected static _subTask = {};
+	protected static _subTask: SubTask;
 	protected static options: {};
 
 	public constructor() {
@@ -316,10 +320,12 @@ class Fang {
 		const modules = require(tasksPath);
 
 		for (const moduleName in modules) {
-			this._subTask = modules[moduleName];
+			const subTasks = modules[moduleName];
 			let subTasksNames = [];
 
 			for (const subTask of subTasks) {
+				this._subTask = subTask;
+
 				if (this._subTaskWellFormed()) {
 					subTasksNames.push(this._getSubTaskName());
 				}
