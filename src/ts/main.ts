@@ -9,7 +9,6 @@ import * as slash from "slash";
 const now = require("performance-now");
 import { existsSync, readFileSync, writeFile } from "fs";
 import { sep, dirname, resolve } from "path";
-import { exit } from "cli";
 
 interface Options {
 	maxCore?: number;
@@ -31,6 +30,7 @@ class Fang {
 	protected files: Array<File>;
 	protected options: Object;
 	protected baseDirectory: string;
+	protected pluginName: string;
 
 	protected static _subTask: SubTask;
 	protected static options: {};
@@ -39,6 +39,7 @@ class Fang {
 		this.files = [];
 		this.options = {};
 		this.baseDirectory = "";
+		this.pluginName = "";
 	}
 
 	public static run(options: Options) {
@@ -335,6 +336,30 @@ class Fang {
 		}
 
 		return tasks;
+	}
+
+	/**
+	 * Displays the current time and an informational message in console.
+	 *
+	 * @param {String} taskName The name of the task that is logging.
+	 * @param {String} message The message to log.
+	 * @throws {Error} If the task name is not provided.
+	 * @throws {Error} If the message is not provided.
+	 */
+	public info(message: string): void {
+		if (message === undefined) {
+			throw new Error("the message is missing");
+		}
+
+		if (typeof message !== "string") {
+			throw new TypeError("the message should be a string");
+		}
+
+		if (message.trim().length < 1) {
+			throw new Error("the message should not be empty");
+		}
+
+		fancyLog.info(`${cliColor.green(this.pluginName)}: ${message}`);
 	}
 
 	protected static _getColoredTask(
