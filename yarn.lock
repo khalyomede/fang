@@ -1388,7 +1388,7 @@ debug@3.2.6, debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^2.1.2, debug@^2.2.0, debug@^2.3.3:
+debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.5.2:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -5048,6 +5048,13 @@ remove-trailing-separator@^1.0.1, remove-trailing-separator@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
+
+rename@1.*:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/rename/-/rename-1.0.4.tgz#a0f25078fa4195e650f73050c7c12ccf689f430b"
+  integrity sha1-oPJQePpBleZQ9zBQx8Esz2ifQws=
+  dependencies:
+    debug "^2.5.2"
 
 repeat-element@^1.1.2:
   version "1.1.3"

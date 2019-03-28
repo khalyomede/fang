@@ -36,6 +36,7 @@
 		"nyc": "13.*",
 		"postcss": "7.*",
 		"pug": "2.*",
+		"rename": "1.*",
 		"typescript": "3.*",
 		"uglify-es": "3.*"
 	},
