@@ -48,10 +48,10 @@ In this example, we will compress (e.g. uglifying) our HTML, Javascript and CSS 
 
 _fang.js_
 ```javascript
-const fang = require('fang');
-const htmlMinifier = require('fang-html-minifier');
-const uglify = require('fang-uglify-es');
-const cleanCss = require('fang-clean-css');
+const fang = require('@khalyomede/fang');
+const htmlMinifier = require('@khalyomede/fang-html-minifier');
+const uglify = require('@khalyomede/fang-uglify-es');
+const cleanCss = require('@khalyomede/fang-clean-css');
 
 const html = () => fang.from('src/**/*.html')
   .do(htmlMinifier())
@@ -147,8 +147,8 @@ You are free to do whatever process you need, since you stick with this architec
 
 _fang.js_
 ```javascript
-const fang = require('fang');
-const babel = require('fang-babel');
+const fang = require('@khalyomede/fang');
+const babel = require('@you/fang-babel');
 
 const js = () => fang.from('src/js/**/*.js')
   .do(babel())
