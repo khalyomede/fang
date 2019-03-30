@@ -16,6 +16,7 @@ Parallelized task runner. Inspired from [Gulp.js](https://gulpjs.com)
 - [Community plugins](#community-plugins)
 - [Fang API](#fang-api)
 - [CLI-API](#cli-api)
+- [Plugin development guidelines](#plugin-development-guidelines)
 
 ## Installation
 
@@ -397,4 +398,98 @@ Prints the version of fang.
 ```bash
 fang --version
 fang -v
+```
+
+## Plugin development guidelines
+
+You are not forced to follow those guidelines. They exist only to improve normalization of the plugins to offer the same experience for the end developer.
+
+- **Do not do a lot of work inside a plugin**
+
+Fang plugins should only be a bridge between a package and Fang. If you need to perform a lot of process inside your plugin, you are more likely to create a dedicated package first, and then use this package inside fang.
+
+- **Keep the same name convention between a package name and your plugin name**
+
+For example, if you are using `html-minifier`, your plugin name will become `fang-hml-minifier`. 
+Another example, if you are using `codeclimate`, your plugin name will become `fang-codeclimate`.
+Last example, if you are using `templateCompiler`, your plugin name will become `fang-templateCompiler`.
+
+In a general manner, just keep `packagename` naming convention in `require('packagename')`.
+
+- **Prompt debug information at the right time**
+
+Use `fang.options.debug` to determine if the user wants you to print additional debug informations. You can take advantage of this information to also enable debug mode in packages that supports it.
+
+```javascript
+// src/main.js
+const { minify } = require('html-minifier');
+const { basename } = require('path');
+
+const fangHtmlMinifier = options => fang => {
+  fang.pluginName = 'fang-html-minifier';
+
+  fang.files.forEach(file => {
+    const fileName = basename(file.path);
+
+    // Here for example
+    if (fang.options.debug) {
+      fang.info(`compressing ${fileName}...`);
+    }
+
+    const result = minify(file.content.toString());
+
+    file.content = Buffer.from(result);
+    
+    // And here for example as well
+    if (fang.options.debug) {
+      fang.info(`compressed ${fileName}`);
+    }
+
+    return file;
+  });
+
+  return fang;
+};
+
+module.exports = fangHtmlMinifier;
+```
+
+- **Do not require Fang as a dependency**
+
+You do not have to require fang on your plugin. When the end developer will use `.do(yourplugin())`, we will take care of providing a fang instance to your plugin.
+
+However, feel free to require it as a dev dependency to test your plugin in real condition with a task file.
+
+- **Use deasync for asynchronous processes**
+
+When the end developer use `.do(yourplugin())`, we expect the process inside your plugin to be synchronous. But we understand that might not be feasable for all the packages.
+
+To make an asynchronous package run sychronously, you can use [deasync](https://www.npmjs.com/package/deasync). Here is an example with [browserify](https://www.npmjs.com/package/browserify), which does not supports synchronicity.
+
+```javascript
+// src/main.js
+const browserify = require('browserify');
+const deasync = require('deasync');
+
+const fangBrowserify = options => fang => {
+  fang.files.forEach(file => {
+    var done = false;
+    browserify(file.path).bundle((error, buffer) => {
+      if (error) {
+        throw error;
+      }
+
+      file.content = buffer;
+
+      done = true;
+    });
+
+    // This is where deasync is blocking the program until browserify finishes
+    deasync.loopWhile(() => !done);
+
+    return file;
+  });
+};
+
+module.exports = fangBrowserify;
 ```
