@@ -199,6 +199,7 @@ module.exports = { build };
 
 ## Official plugins
 
+- [babel](https://www.npmjs.com/package/@khalyomede/fang-babel)
 - [browserify](https://www.npmjs.com/package/@khalyomede/fang-browserify)
 - [pug](https://www.npmjs.com/package/@khalyomede/fang-pug)
 
