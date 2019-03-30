@@ -174,6 +174,13 @@ class Fang {
 		}
 	}
 
+	/**
+	 * Use a glob to determine which files to process.
+	 *
+	 * @param {String} path The path or the glob.
+	 * @return {Object}
+	 * @see https://www.npmjs.com/package/glob#usage For an example of glob.
+	 */
 	public static from(path: string): Fang {
 		const instance = new this();
 
@@ -269,10 +276,22 @@ class Fang {
 		});
 	}
 
+	/**
+	 * Executes a plugin to the files.
+	 *
+	 * @param {Function} callable The plugin to use.
+	 * @return {Object}
+	 */
 	public do(callable: Function): Fang {
 		return callable(this);
 	}
 
+	/**
+	 * Save the files to the desired folder.
+	 *
+	 * @param {String} path The path to the folder destination.
+	 * @return {Promise}
+	 */
 	public save(path: string) {
 		const fileCount = this.files.length;
 
