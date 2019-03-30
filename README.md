@@ -164,6 +164,7 @@ fang build
 
 ## Official plugins
 
+- [browserify](https://www.npmjs.com/package/@khalyomede/fang-browserify)
 - [pug](https://www.npmjs.com/package/@khalyomede/fang-pug)
 
 ## Community plugins
