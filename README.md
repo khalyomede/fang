@@ -37,6 +37,7 @@ yarn global add @khalyomede/fang@0.*
 - [Restrict the number of core to use](#restrict-the-number-of-core-to-use)
 - [Moving the fang task file in another place](#moving-the-fang-task-in-another-place)
 - [Create your fang plugin](#create-your-fang-plugin)
+- [Create a plugin inside-a-task-file](#create-a-plugin-inside-a-task-file)
 
 ### Compressing your assets
 
@@ -160,6 +161,39 @@ export.modules = { build };
 
 ```bash
 fang build
+```
+
+### Create a plugin inside a task file
+
+In this example, we will create a plugin on the fly. This is useful if you do not find a fang plugin that fits your need, but still want to use it in your tasks.
+
+```javascript
+// fang.js
+const fang = require('@khalyomede/fang');
+const minify = require('html-minifier').minify;
+
+// Inline fang plugin
+const htmlMinifier = options => fang => {
+  fang.pluginName = 'fang-html-minifier';
+
+  fang.files.forEach(file => {
+    const result = minify(file.content.toString());
+
+    file.content = Buffer.from(result);
+
+    return file;
+  });
+
+  return fang;
+};
+
+const html = () => fang.from('src/**/*.html')
+  .do(htmlMinifier())
+  .save('dist');
+
+const build = [html];
+
+module.exports = { build };
 ```
 
 ## Official plugins
