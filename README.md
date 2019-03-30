@@ -243,6 +243,8 @@ Fang.files[0].content: Buffer;
 
 ### options
 
+**type** object
+
 The options specified on the command line. 
 
 ```javascript
@@ -251,8 +253,6 @@ Fang.options.maxCore: number; // The number of core to use.
 Fang.options.tasksPath: string; // The path to the fang tasks configuration file.
 Fang.options.taskName: string; // The name of the task being ran.
 ```
-
-**type** object
 
 ### from
 
@@ -321,14 +321,22 @@ interface File {
   - [task](#task)
 - options
   - [--debug](#debug)
+  - [--help](#help)
   - [--list](#list)
   - [--max-core](#max-core)
+  - [--version](#version)
 
 ### task
 
 **type** string
 
 The task name. It corresponds to one of the variables that you exported in your task file. 
+
+```bash
+fang build
+fang production
+fang images
+```
 
 For example, if your task file contains:
 
@@ -340,9 +348,23 @@ module.exports = { build, img };
 
 It means you have access to 2 tasks: `build` and `img`.
 
+### help
+
+Prints an help manual.
+
+```bash
+fang --help
+fang -h
+```
+
 ### debug
 
 The plugins that implement well this option will display more information on console.
+
+```bash
+fang --debug
+fang -d
+```
 
 ### list
 
@@ -359,11 +381,20 @@ fang -l
 
 The number of core to use for the task. By default, fang will use as much cores as possible (e.g. the maximum). 
 
+```bash
+fang --max-core 4 build
+fang -c 4 build
+```
+
 Fang will perform one sub task per cores. For example, if your computer dispose of 8 cores, and you are running a task that contains 4 sub tasks, only 4 cores will be used, one core for each tasK.
 
 However, if your task is composed of 12 sub tasks, only 8 tasks can be ran simultaneously, and the 4 remaining tasks will "wait their turn" until one sub task finishes its process and frees a core, and so on until no more sub task need to be processed (the end of the task).
 
+### version
+
+Prints the version of fang.
+
 ```bash
-fang --max-core 4 build
-fang -c 4 build
+fang --version
+fang -v
 ```
