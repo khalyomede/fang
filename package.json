@@ -33,6 +33,7 @@
 		"mocha": "6.*",
 		"modify-filename": "1.*",
 		"node-sass": "4.*",
+		"np": "4.*",
 		"nyc": "13.*",
 		"postcss": "7.*",
 		"pug": "2.*",
@@ -59,7 +60,8 @@
 		"test": "nyc mocha test",
 		"mocha": "mocha",
 		"mutate": "stryker run --mutate lib/main.js",
-		"coverage": "nyc mocha test && nyc report --reporter=text-lcov | coveralls"
+		"coverage": "nyc mocha test && nyc report --reporter=text-lcov | coveralls",
+		"release": "np"
 	},
 	"files": [
 		"lib/main.js",
