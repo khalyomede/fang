@@ -1,8 +1,12 @@
+# Deprecation
+
+This library is no longer maintained. Please use [https://npmjs.com/package/@fang/core]() instead.
+
 # Fang
 
 Parallelized task runner. Inspired from [Gulp.js](https://gulpjs.com)
 
-![npm](https://img.shields.io/npm/v/@khalyomede/fang.svg) ![NPM](https://img.shields.io/npm/l/@khalyomede/fang.svg) 
+![npm](https://img.shields.io/npm/v/@khalyomede/fang.svg) ![NPM](https://img.shields.io/npm/l/@khalyomede/fang.svg)
 
 [![Coverage Status](https://coveralls.io/repos/github/khalyomede/fang/badge.svg?branch=master)](https://coveralls.io/github/khalyomede/fang?branch=master) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@khalyomede/fang.svg)
 
@@ -48,6 +52,7 @@ In this example, we will compress (e.g. uglifying) our HTML, Javascript and CSS 
 2. Add your tasks on your fang file.
 
 _fang.js_
+
 ```javascript
 const fang = require('@khalyomede/fang');
 const htmlMinifier = require('@khalyomede/fang-html-minifier');
@@ -70,9 +75,11 @@ const build = [html, js, css];
 
 export.modules = { build }
 ```
+
 3. On your `package.json`, create a shortcut for your build command.
 
 _package.json_
+
 ```javascript
 {
   ...,
@@ -81,11 +88,13 @@ _package.json_
   }
 }
 ```
+
 4. On your root directory, run the following command.
 
 ```bash
 npm run build
 ```
+
 ### Restrict the number of core to use
 
 In this example, you will see how you can reduce the number of core used by fang, with the `--max-core` option. By default, fang will use the maximum of core available.
@@ -106,6 +115,7 @@ In this example, you will be able to use a vendor library like `sass`, or `pug` 
 2. In your main file (could be `index.js`, or `main.js`), enter this starter code.
 
 _lib/main.js_
+
 ```javascript
 const fangBabel = options => fang => {
   fang.files.map(file => {
@@ -119,15 +129,18 @@ const fangBabel = options => fang => {
 
 module.exports = fangBabel;
 ```
+
 3. Add your logic, in our case we will support babel.
 
 _lib/main.js_
+
 ```javascript
-const babel = require('@babel/core');
+const babel = require("@babel/core");
 
 const fangBabel = options => fang => {
   fang.files.map(file => {
-    const transpiled = babel.transformSync(file.content.toString(), options).code;
+    const transpiled = babel.transformSync(file.content.toString(), options)
+      .code;
 
     file.content = Buffer.from(transpiled);
 
@@ -140,13 +153,14 @@ const fangBabel = options => fang => {
 module.exports = fangBabel;
 ```
 
-As you can see, the files are stored in a form of a Buffer. So you will need to use a `.toString()` to get back the raw content, and use `Buffer.from(string)` to put it back on the `file.content`. 
+As you can see, the files are stored in a form of a Buffer. So you will need to use a `.toString()` to get back the raw content, and use `Buffer.from(string)` to put it back on the `file.content`.
 
 You are free to do whatever process you need, since you stick with this architecture.
 
 4. Publish, and use it.
 
 _fang.js_
+
 ```javascript
 const fang = require('@khalyomede/fang');
 const babel = require('@you/fang-babel');
@@ -170,12 +184,12 @@ In this example, we will create a plugin on the fly. This is useful if you do no
 
 ```javascript
 // fang.js
-const fang = require('@khalyomede/fang');
-const minify = require('html-minifier').minify;
+const fang = require("@khalyomede/fang");
+const minify = require("html-minifier").minify;
 
 // Inline fang plugin
 const htmlMinifier = options => fang => {
-  fang.pluginName = 'fang-html-minifier';
+  fang.pluginName = "fang-html-minifier";
 
   fang.files.forEach(file => {
     const result = minify(file.content.toString());
@@ -188,9 +202,11 @@ const htmlMinifier = options => fang => {
   return fang;
 };
 
-const html = () => fang.from('src/**/*.html')
-  .do(htmlMinifier())
-  .save('dist');
+const html = () =>
+  fang
+    .from("src/**/*.html")
+    .do(htmlMinifier())
+    .save("dist");
 
 const build = [html];
 
@@ -247,7 +263,7 @@ Fang.files[0].content: Buffer;
 
 **type** object
 
-The options specified on the command line. 
+The options specified on the command line.
 
 ```javascript
 Fang.options.debug: boolean; // dsplays additional information on console or not.
@@ -312,8 +328,8 @@ Represents a file, its path and its content.
 
 ```javascript
 interface File {
-    path: string;
-    content: Buffer;
+  path: string;
+  content: Buffer;
 }
 ```
 
@@ -332,7 +348,7 @@ interface File {
 
 **type** string
 
-The task name. It corresponds to one of the variables that you exported in your task file. 
+The task name. It corresponds to one of the variables that you exported in your task file.
 
 ```bash
 fang build
@@ -381,7 +397,7 @@ fang -l
 
 **type** integer
 
-The number of core to use for the task. By default, fang will use as much cores as possible (e.g. the maximum). 
+The number of core to use for the task. By default, fang will use as much cores as possible (e.g. the maximum).
 
 ```bash
 fang --max-core 4 build
@@ -411,7 +427,7 @@ Fang plugins should only be a bridge between a package and Fang. If you need to 
 
 - **Keep the same name convention between a package name and your plugin name**
 
-For example, if you are using `html-minifier`, your plugin name will become `fang-hml-minifier`. 
+For example, if you are using `html-minifier`, your plugin name will become `fang-hml-minifier`.
 Another example, if you are using `codeclimate`, your plugin name will become `fang-codeclimate`.
 Last example, if you are using `templateCompiler`, your plugin name will become `fang-templateCompiler`.
 
@@ -423,11 +439,11 @@ Use `fang.options.debug` to determine if the user wants you to print additional 
 
 ```javascript
 // src/main.js
-const { minify } = require('html-minifier');
-const { basename } = require('path');
+const { minify } = require("html-minifier");
+const { basename } = require("path");
 
 const fangHtmlMinifier = options => fang => {
-  fang.pluginName = 'fang-html-minifier';
+  fang.pluginName = "fang-html-minifier";
 
   fang.files.forEach(file => {
     const fileName = basename(file.path);
@@ -440,7 +456,7 @@ const fangHtmlMinifier = options => fang => {
     const result = minify(file.content.toString());
 
     file.content = Buffer.from(result);
-    
+
     // And here for example as well
     if (fang.options.debug) {
       fang.info(`compressed ${fileName}`);
@@ -469,8 +485,8 @@ To make an asynchronous package run sychronously, you can use [deasync](https://
 
 ```javascript
 // src/main.js
-const browserify = require('browserify');
-const deasync = require('deasync');
+const browserify = require("browserify");
+const deasync = require("deasync");
 
 const fangBrowserify = options => fang => {
   fang.files.forEach(file => {
